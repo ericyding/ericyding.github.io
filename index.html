@@ -412,6 +412,17 @@
     raf = requestAnimationFrame(frame);
   }
 })();
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener("click", e => {
+    const target = document.getElementById(a.getAttribute("href").slice(1));
+    if (!target) return;
+    e.preventDefault();
+    const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    target.scrollIntoView({ behavior: calm ? "auto" : "smooth", block: "start" });
+    const heading = target.querySelector("h2");
+    if (heading) { heading.setAttribute("tabindex", "-1"); heading.focus({ preventScroll: true }); }
+  });
+});
 </script>
 </body>
 </html>
