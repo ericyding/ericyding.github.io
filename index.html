@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eric Ding, data engineer</title>
+<meta name="description" content="Eric Ding is a computer science student at the University of Alberta who builds data pipelines. Experience at ATCO Electric, the University of Alberta and CGI, and heading to RBC in January 2027.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600&family=Syne:wght@600;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --lake: #0a2b3c;
+    --foam: #eaf4f4;
+    --mist: #9fbac4;
+    --bronze: #d08a52;
+    --silver: #cbd5dd;
+    --gold: #f4c54f;
+    --display: "Syne", system-ui, sans-serif;
+    --text: "Literata", Georgia, serif;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+  body {
+    margin: 0;
+    background: var(--lake);
+    color: var(--foam);
+    font-family: var(--text);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+  }
+  a { color: inherit; }
+  a:focus-visible, summary:focus-visible { outline: 3px solid var(--gold); outline-offset: 4px; border-radius: 2px; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 22px; }
+  section { scroll-margin-top: 24px; }
+
+  /* Top bar */
+  .bar { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; padding-top: 24px; font: 600 .95rem var(--display); }
+  .bar span { color: var(--mist); }
+  .bar nav { display: flex; gap: 22px; flex-wrap: wrap; }
+  .bar a { text-decoration: none; padding: 4px 0; border-bottom: 2px solid transparent; }
+  .bar a:hover { border-bottom-color: var(--gold); }
+
+  /* Hero */
+  .hero { padding: 56px 0 0; }
+  h1 {
+    margin: 0;
+    font: 800 clamp(3.6rem, 14vw, 9.5rem)/.9 var(--display);
+    letter-spacing: -.04em;
+  }
+  .lede { margin: 26px 0 0; max-width: 36em; font-size: 1.25rem; line-height: 1.55; color: var(--silver); }
+  .flow-wrap { margin-top: 44px; }
+  canvas#flow { display: block; width: 100%; height: clamp(230px, 34vw, 340px); touch-action: pan-y; }
+  .legend { display: grid; grid-template-columns: 34fr 32fr 34fr; gap: 0; margin-top: 10px; font-size: .95rem; line-height: 1.45; }
+  .legend div { padding-right: 12px; }
+  .legend b { display: block; font: 800 1.05rem var(--display); margin-bottom: 2px; }
+  .legend .b b { color: var(--bronze); }
+  .legend .s b { color: var(--silver); }
+  .legend .g b { color: var(--gold); }
+  .legend span { color: var(--mist); }
+  .flow-note { margin: 18px 0 0; font-size: .95rem; color: var(--mist); max-width: 40em; }
+
+  /* Sections */
+  .sec { padding-top: 104px; }
+  h2 { margin: 0; font: 800 clamp(2rem, 5vw, 3rem)/1.05 var(--display); letter-spacing: -.025em; }
+  .intro { margin: 14px 0 0; max-width: 36em; color: var(--silver); }
+
+  /* Experience river */
+  .river { position: relative; margin-top: 52px; padding-left: 56px; }
+  .river::before {
+    content: ""; position: absolute; left: 14px; top: 10px; bottom: 10px; width: 4px; border-radius: 2px;
+    background: linear-gradient(to bottom, var(--bronze), var(--silver) 52%, var(--gold));
+  }
+  .role { position: relative; padding-bottom: 48px; }
+  .role:last-child { padding-bottom: 0; }
+  .role::before {
+    content: ""; position: absolute; left: -49px; top: 8px; width: 18px; height: 18px; border-radius: 50%;
+    background: var(--c); box-shadow: 0 0 0 5px var(--lake);
+  }
+  .role.next::before { box-shadow: 0 0 0 5px var(--lake), 0 0 22px 4px rgba(244, 197, 79, .55); }
+  .role summary { list-style: none; cursor: pointer; display: block; position: relative; padding-right: 48px; }
+  .role summary::-webkit-details-marker { display: none; }
+  .role summary::after { content: "+"; position: absolute; right: 2px; top: 0; font: 600 1.9rem/1 var(--display); color: var(--c); transition: transform .2s; }
+  .role details[open] summary::after { transform: rotate(45deg); }
+  .when { display: block; font: 600 .9rem var(--display); color: var(--c); }
+  .title { display: block; margin-top: 4px; font: 800 clamp(1.4rem, 3.2vw, 1.9rem)/1.15 var(--display); letter-spacing: -.015em; }
+  .org { display: block; margin-top: 2px; color: var(--mist); }
+  .gist { display: block; margin-top: 12px; max-width: 38em; color: var(--silver); }
+  .role ul { margin: 18px 0 0; padding-left: 1.1em; max-width: 40em; }
+  .role li { margin-bottom: 10px; color: var(--foam); }
+  .role li::marker { color: var(--c); }
+  .role strong { font-weight: 600; color: var(--gold); }
+  .role .plain { margin: 12px 0 0; max-width: 38em; color: var(--silver); }
+  @media (prefers-reduced-motion: reduce) { .role summary::after { transition: none; } }
+
+  /* Projects */
+  .projects { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px 48px; margin-top: 44px; }
+  .proj { border-top: 3px solid var(--c); padding-top: 20px; }
+  .proj h3 { margin: 0; font: 800 1.5rem/1.15 var(--display); letter-spacing: -.015em; }
+  .proj .tech { margin: 6px 0 0; color: var(--mist); font-size: .95rem; }
+  .proj p { margin: 14px 0 0; }
+  .proj a { display: inline-block; margin-top: 16px; font: 600 .95rem var(--display); text-decoration-thickness: 2px; text-underline-offset: 5px; text-decoration-color: var(--c); }
+
+  /* About */
+  .about { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 40px 64px; margin-top: 40px; }
+  .about p { margin: 0 0 18px; max-width: 34em; }
+  .edu { color: var(--mist); font-size: .98rem; }
+  .interests { margin: 0; }
+  .interests dt { font: 800 1.2rem/1.2 var(--display); color: var(--gold); }
+  .interests dd { margin: 6px 0 26px; color: var(--silver); max-width: 28em; }
+
+  /* Toolbox */
+  .stack { margin: 40px 0 0; }
+  .stack .row { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 8px 32px; padding: 20px 0; border-top: 1px solid rgba(234, 244, 244, .18); }
+  .stack dt { font: 800 1.1rem var(--display); color: var(--c); }
+  .stack dd { margin: 0; max-width: 46em; color: var(--silver); }
+
+  /* Contact */
+  .mail { display: inline-block; margin-top: 26px; font: 800 clamp(1.5rem, 5.4vw, 3.1rem)/1.1 var(--display); letter-spacing: -.02em; text-decoration-color: var(--gold); text-decoration-thickness: 4px; text-underline-offset: 8px; overflow-wrap: anywhere; }
+  .elsewhere { display: flex; gap: 28px; flex-wrap: wrap; margin-top: 26px; font: 600 1rem var(--display); }
+  .elsewhere a { text-decoration-thickness: 2px; text-underline-offset: 5px; }
+
+  footer { margin-top: 104px; padding: 24px 0 40px; border-top: 1px solid rgba(234, 244, 244, .18); color: var(--mist); font-size: .95rem; }
+
+  @media (max-width: 760px) {
+    .about { grid-template-columns: 1fr; }
+    .stack .row { grid-template-columns: 1fr; }
+    .river { padding-left: 46px; }
+    .river::before { left: 9px; }
+    .role::before { left: -44px; width: 16px; height: 16px; }
+    .legend { font-size: .85rem; }
+    .legend b { font-size: .95rem; }
+    .sec { padding-top: 80px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="bar">
+    <span>Edmonton, Alberta</span>
+    <nav aria-label="Sections">
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+
+  <header class="hero">
+    <h1>Eric Ding</h1>
+    <p class="lede">I'm a computer science student at the University of Alberta who builds the data pipelines that make reports trustworthy. In January 2027 I start as a software engineer co-op at RBC in Toronto.</p>
+
+    <div class="flow-wrap">
+      <canvas id="flow" aria-hidden="true"></canvas>
+      <div class="legend" aria-hidden="true">
+        <div class="b"><b>Bronze</b><span>Raw data arrives messy.</span></div>
+        <div class="s"><b>Silver</b><span>Cleaned and standardized.</span></div>
+        <div class="g"><b>Gold</b><span>Ready for reports.</span></div>
+      </div>
+      <p class="flow-note">These are the three layers I design at work. Move your cursor through the data to scatter it.</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="sec" id="experience" aria-labelledby="exp-h">
+      <h2 id="exp-h">Experience</h2>
+      <p class="intro">Read top to bottom, like data moving through the layers: spreadsheets, then internal tools, then enterprise pipelines. Select a role to see what I did.</p>
+
+      <div class="river">
+        <article class="role" style="--c: var(--bronze)">
+          <details>
+            <summary>
+              <span class="when">May to August 2023</span>
+              <span class="title">Business Analyst Intern</span>
+              <span class="org">CGI, Edmonton</span>
+              <span class="gist">Forecasting models for large project portfolios, and a close look at where AI could help.</span>
+            </summary>
+            <ul>
+              <li>Built <strong>Excel</strong> budget forecasting models for multimillion-dollar project portfolios, giving teams clear financial summaries for resource allocation and planning.</li>
+              <li>Turned project performance data into executive summaries on where <strong>AI</strong> integration could help, which fed into leadership's decisions on implementation priorities.</li>
+            </ul>
+          </details>
+        </article>
+
+        <article class="role" style="--c: color-mix(in srgb, var(--bronze) 35%, var(--silver) 65%)">
+          <details>
+            <summary>
+              <span class="when">May to August 2024</span>
+              <span class="title">Junior Software Developer</span>
+              <span class="org">Department of Civil Engineering, University of Alberta</span>
+              <span class="gist">An invoicing app that gave a team back five hours a week.</span>
+            </summary>
+            <ul>
+              <li>Built a Budget and Invoice Management application in <strong>C#, MySQL and .NET</strong> for budget tracking and invoice generation. It cut manual work by <strong>5 hours a week</strong> and reduced errors.</li>
+              <li>Wrote <strong>PowerShell</strong> scripts and tools to monitor team activity and convert Oracle data from XER and General XML into SIMPP XML, improving accuracy and system integration.</li>
+            </ul>
+          </details>
+        </article>
+
+        <article class="role" style="--c: color-mix(in srgb, var(--silver) 62%, var(--gold) 38%)">
+          <details open>
+            <summary>
+              <span class="when">May 2025 to April 2026</span>
+              <span class="title">Data Engineer Co-op</span>
+              <span class="org">ATCO Electric, Edmonton</span>
+              <span class="gist">Moved 20M+ rows to a lakehouse, and caught a KPI error that lifted accuracy from 75% to 98%+.</span>
+            </summary>
+            <ul>
+              <li>Led the enterprise data migration from <strong>SQL Server</strong> to <strong>ADLS</strong> and <strong>Azure Databricks</strong>, redesigning <strong>25+ pipelines</strong> that process <strong>20M+ rows</strong> for a lakehouse architecture while keeping disruption to active reporting low.</li>
+              <li>Designed Bronze-to-Gold medallion architecture schemas in Azure Databricks with <strong>Spark SQL</strong> and <strong>PySpark</strong>, standardizing raw operational data for enterprise reporting and analytics.</li>
+              <li>Audited <strong>30+ Power BI</strong> dashboards after the migration, found and corrected a critical KPI calculation error, and raised its accuracy from <strong>75% to 98%+</strong>.</li>
+              <li>Developed a <strong>Power BI</strong> forecasting dashboard tracking <strong>$100M+</strong> in customer project costs, helping the Project Master make financial planning and resource decisions across the portfolio.</li>
+              <li>Maintained the customer-facing pricing rate tables on <strong>Google Cloud</strong> that power ATCO's Self-Serve estimation tool, so project quotes stay accurate.</li>
+            </ul>
+          </details>
+        </article>
+
+        <article class="role next" style="--c: var(--gold)">
+          <span class="when">Starting January 2027</span>
+          <span class="title">Software Engineer Co-op</span>
+          <span class="org">RBC, Toronto, Ontario</span>
+          <p class="plain">Next stop. I'm looking forward to moving from data pipelines to building software at a bank's scale.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="sec" id="projects" aria-labelledby="proj-h">
+      <h2 id="proj-h">Side projects</h2>
+      <p class="intro">Two things I built because I wanted them to exist.</p>
+
+      <div class="projects">
+        <article class="proj" style="--c: var(--silver)">
+          <h3>EventEasy</h3>
+          <p class="tech">Java, XML, Android Studio, Figma, Firebase</p>
+          <p>A full-stack Android app for creating, organizing and joining events. I prototyped the interface in Figma, then built it with Firebase for real-time sync, QR code check-in, and location-based event discovery through the Google Maps API.</p>
+          <a href="https://github.com/ericyding">See my GitHub</a>
+        </article>
+
+        <article class="proj" style="--c: var(--gold)">
+          <h3>League of Legends Draft Advisor</h3>
+          <p class="tech">Python, Pandas, NumPy, Matplotlib, Streamlit, Git</p>
+          <p>A data pipeline that turns raw logs from 2,000+ pro matches into feature tables: win rates, synergy and counter-matchups. A scoring system uses them to rank the best next pick for a team composition, shown in an interactive Streamlit dashboard.</p>
+          <a href="https://github.com/ericyding">See my GitHub</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="sec" id="about" aria-labelledby="about-h">
+      <h2 id="about-h">About me</h2>
+
+      <div class="about">
+        <div>
+          <p>I'm studying computer science at the University of Alberta, with a minor in Business. My co-ops have mostly been about making data dependable: moving it, cleaning it, checking it, and presenting it so someone can make a decision.</p>
+          <p>The business side shows up in how I work. I start with the decision a person needs to make, then build backwards to the data that supports it.</p>
+          <p class="edu">University of Alberta, B.Sc. in Computer Science, Minor in Business. September 2022 to expected December 2027.</p>
+        </div>
+
+        <dl class="interests">
+          <dt>League of Legends</dt>
+          <dd>Enough that I built a draft analysis tool from thousands of pro matches.</dd>
+          <dt>Software with real users</dt>
+          <dd>An event app, an invoicing tool, a pricing estimator. The projects I like most have someone waiting to use them.</dd>
+        </dl>
+      </div>
+    </section>
+
+    <section class="sec" id="toolbox" aria-labelledby="tool-h">
+      <h2 id="tool-h">Toolbox</h2>
+
+      <dl class="stack">
+        <div class="row" style="--c: var(--bronze)">
+          <dt>Languages</dt>
+          <dd>Python, SQL (MS SQL Server and MySQL), PySpark, Spark SQL, C#, Java, C, PowerShell, HTML, CSS, XML.</dd>
+        </div>
+        <div class="row" style="--c: var(--silver)">
+          <dt>Data and tools</dt>
+          <dd>Azure Databricks, Power BI, Power Automate, Power Apps, Pandas, NumPy, Scikit-learn, TensorFlow, Jupyter, IBM SPSS, Streamlit, Git, VS Code, SSMS, Android Studio, PyCharm, Visual Studio, JIRA, Linux, Bash.</dd>
+        </div>
+        <div class="row" style="--c: var(--gold)">
+          <dt>Cloud</dt>
+          <dd>Azure Data Lake Storage Gen2, Google Cloud, Firebase.</dd>
+        </div>
+      </dl>
+    </section>
+
+    <section class="sec" id="contact" aria-labelledby="contact-h">
+      <h2 id="contact-h">Contact</h2>
+      <p class="intro">Email is the quickest way to reach me.</p>
+      <a class="mail" href="mailto:eyding@ualberta.ca">eyding@ualberta.ca</a>
+      <div class="elsewhere">
+        <a href="https://www.linkedin.com/in/ericyding/">LinkedIn</a>
+        <a href="https://github.com/ericyding">GitHub</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>Eric Ding, 2026. Built by hand and hosted on GitHub Pages.</footer>
+</div>
+
+<script>
+/* Hero: raw data (bronze) is cleaned into lanes (silver) and then
+   converges into one tidy stream (gold). */
+(() => {
+  const cv = document.getElementById("flow");
+  const ctx = cv.getContext("2d");
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const COL = { bronze: [208, 138, 82], silver: [203, 213, 221], gold: [244, 197, 79] };
+  const LANES = 7;
+  let W = 0, H = 0, parts = [], t = 0, last = 0, raf = 0;
+  const mouse = { x: -999, y: -999 };
+
+  const clamp01 = v => Math.min(1, Math.max(0, v));
+  const smooth = (a, b, x) => { const k = clamp01((x - a) / (b - a)); return k * k * (3 - 2 * k); };
+  const mix = (a, b, k) => a + (b - a) * k;
+  const mixCol = (a, b, k) => [mix(a[0], b[0], k), mix(a[1], b[1], k), mix(a[2], b[2], k)];
+
+  function spawn(initial) {
+    return {
+      x: initial ? Math.random() * W : -8,
+      y0: 18 + Math.random() * (H - 36),
+      lane: Math.floor(Math.random() * LANES),
+      v: 50 + Math.random() * 55,
+      ph: Math.random() * 6.283,
+      am: 6 + Math.random() * 18,
+      fr: 0.6 + Math.random() * 1.4,
+      ox: 0, oy: 0
+    };
+  }
+
+  function resize() {
+    const r = cv.getBoundingClientRect();
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = r.width; H = r.height;
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const n = Math.round(Math.min(230, Math.max(70, W / 5)));
+    parts = Array.from({ length: n }, () => spawn(true));
+    if (reduce) draw();
+  }
+
+  function position(p) {
+    const k = p.x / W;
+    const s1 = smooth(0.30, 0.38, k);
+    const s2 = smooth(0.62, 0.70, k);
+    const laneY = H * 0.12 + (p.lane + 0.5) * (H * 0.76 / LANES);
+    const centerY = H / 2 + (p.lane - (LANES - 1) / 2) * (H * 0.055);
+    let y = p.y0 + Math.sin(t * p.fr + p.ph) * p.am * (1 - s1);
+    y = mix(y, laneY, s1);
+    y = mix(y, centerY, s2);
+    return { y, s1, s2 };
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.save();
+    ctx.setLineDash([3, 7]);
+    ctx.strokeStyle = "rgba(234,244,244,.2)";
+    ctx.lineWidth = 1;
+    for (const g of [0.34, 0.66]) {
+      ctx.beginPath(); ctx.moveTo(W * g, 0); ctx.lineTo(W * g, H); ctx.stroke();
+    }
+    ctx.restore();
+
+    for (const p of parts) {
+      const q = position(p);
+      const c = mixCol(mixCol(COL.bronze, COL.silver, q.s1), COL.gold, q.s2);
+      ctx.fillStyle = `rgba(${c[0] | 0},${c[1] | 0},${c[2] | 0},.92)`;
+      const px = p.x + p.ox, py = q.y + p.oy;
+      if (q.s1 < 0.5) {
+        ctx.beginPath(); ctx.arc(px, py, 2.7, 0, 6.283); ctx.fill();
+      } else {
+        ctx.fillRect(px - 2.3, py - 2.3, 4.6, 4.6);
+      }
+    }
+  }
+
+  function frame(now) {
+    const dt = Math.min(0.05, (now - last) / 1000 || 0);
+    last = now; t += dt;
+    const decay = Math.exp(-dt * 4);
+    for (let i = 0; i < parts.length; i++) {
+      const p = parts[i];
+      p.x += p.v * dt;
+      const q = position(p);
+      const dx = p.x + p.ox - mouse.x, dy = q.y + p.oy - mouse.y;
+      const d2 = dx * dx + dy * dy;
+      if (d2 < 9000) {
+        const d = Math.sqrt(d2) || 1, f = (1 - d / 95) * 160 * dt * 6;
+        p.ox += (dx / d) * f; p.oy += (dy / d) * f;
+      }
+      p.ox *= decay; p.oy *= decay;
+      if (p.x > W + 8) parts[i] = spawn(false);
+    }
+    draw();
+    raf = requestAnimationFrame(frame);
+  }
+
+  cv.addEventListener("pointermove", e => {
+    const r = cv.getBoundingClientRect();
+    mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top;
+  });
+  cv.addEventListener("pointerleave", () => { mouse.x = mouse.y = -999; });
+
+  new ResizeObserver(resize).observe(cv);
+  resize();
+  if (!reduce) {
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) cancelAnimationFrame(raf);
+      else { last = performance.now(); raf = requestAnimationFrame(frame); }
+    });
+    raf = requestAnimationFrame(frame);
+  }
+})();
+</script>
+</body>
+</html>
